@@ -2,24 +2,19 @@
   <div>
     <h2>
       {{ foodName }}
-      <img src="/img_quality.svg" v-show="foodIsFavorite" />
+      <img src="/img_quality.svg" v-show="isFavorite" />
     </h2>
     <p>{{ foodDesc }}</p>
-    <button v-on:click="toggleFavorite">Favorite</button>
+    <button @click="toggleFavorite">Favorite</button>
   </div>
 </template>
 
 <script>
 export default {
   props: ["foodName", "foodDesc", "isFavorite"],
-  data() {
-    return {
-      foodIsFavorite: this.isFavorite,
-    };
-  },
   methods: {
     toggleFavorite() {
-      this.foodIsFavorite = !this.foodIsFavorite;
+      this.$emit("toggle-favorite", this.foodName);
     },
   },
 };
